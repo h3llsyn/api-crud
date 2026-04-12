@@ -7,4 +7,4 @@ CREATE TABLE clientes(
      ativo tinyint not null,
 
      primary key(id)
-)
+);
