@@ -4,6 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.br.CPF;
 
 public record DadosCadastroCliente(
     @NotBlank
@@ -19,6 +20,7 @@ public record DadosCadastroCliente(
     @NotBlank
     @Size(min = 11, max = 11)
     @Column(unique = true)
+    @CPF
     String cpf,
 
     @Size(max = 20)

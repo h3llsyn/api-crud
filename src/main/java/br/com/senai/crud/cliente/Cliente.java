@@ -33,12 +33,16 @@ public class Cliente {
     }
 
     public void atualizarCliente(DadosAtualizarCliente dados){
-        if(dados.nome() != null && dados.nome().isBlank()){
+        if(dados.nome() != null && !dados.nome().isBlank()){
             this.nome = dados.nome();
         }
 
-        if(dados.email() != null && dados.email().isBlank()){
+        if(dados.email() != null && !dados.email().isBlank()){
             this.email = dados.email();
+        }
+
+        if(dados.telefone() !=null){
+            this.telefone = dados.telefone();
         }
     }
 
