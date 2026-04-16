@@ -1,6 +1,7 @@
 package br.com.senai.crud.cliente;
 
 import jakarta.persistence.Column;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 public record DadosAtualizarCliente(
@@ -14,6 +15,7 @@ public record DadosAtualizarCliente(
         String email,
 
         @Size(max = 20)
+        @Pattern(regexp = "\\d{10,11}")
         String telefone
 ) {
 }

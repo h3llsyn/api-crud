@@ -3,6 +3,7 @@ package br.com.senai.crud.cliente;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.br.CPF;
 
@@ -24,6 +25,7 @@ public record DadosCadastroCliente(
     String cpf,
 
     @Size(max = 20)
+    @Pattern(regexp = "\\d{10,11}")
     String telefone
 ) {
 }
