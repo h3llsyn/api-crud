@@ -1,10 +1,9 @@
 package br.com.senai.crud.cliente;
 
+import br.com.senai.crud.endereco.DadosEndereco;
 import jakarta.persistence.Column;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.br.CPF;
 
 public record DadosCadastroCliente(
@@ -26,6 +25,8 @@ public record DadosCadastroCliente(
 
     @Size(max = 20)
     @Pattern(regexp = "\\d{10,11}")
-    String telefone
+    String telefone,
+
+    @NotNull @Valid DadosEndereco endereco
 ) {
 }
