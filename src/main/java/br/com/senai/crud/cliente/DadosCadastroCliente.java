@@ -1,6 +1,6 @@
 package br.com.senai.crud.cliente;
 
-import br.com.senai.crud.endereco.DadosEndereco;
+import br.com.senai.crud.endereco.DadosCadastroEndereco;
 import jakarta.persistence.Column;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
@@ -27,6 +27,6 @@ public record DadosCadastroCliente(
     @Pattern(regexp = "\\d{10,11}")
     String telefone,
 
-    @NotNull @Valid DadosEndereco endereco
+    @NotNull @Valid DadosCadastroEndereco endereco
 ) {
 }
