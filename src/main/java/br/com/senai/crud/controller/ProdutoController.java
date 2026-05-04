@@ -19,6 +19,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -120,6 +121,36 @@ public class ProdutoController {
     @Transactional
     @Operation(summary = "Atualizar")
     @Tag(name = "Atualizar Produto")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Produto atualizado com sucesso",
+            content = {
+                    @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = DadosDetalhamentoProduto.class))
+            }),
+            @ApiResponse(responseCode = "409", description = "SKU já cadastrado", content = @Content),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Recurso não encontrado",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class),
+                            examples = {
+                                    @ExampleObject(
+                                            name = "Categoria inválida",
+                                            value = """
+                                                    {"codigo": "CATEGORIA_NAO_ENCONTRADA", "mensagem": "Categoria inválida"}
+                                                    """
+                                    ),
+                                    @ExampleObject(
+                                            name = "Produto inválido",
+                                            value = """
+                                                        {"codigo": "PRODUTO_NAO_EONCONTRADO", "mensagem": "Produto inválido"}
+                                                        """
+                                    )
+                            }
+                    )
+            )
+    })
     public ResponseEntity<DadosDetalhamentoProduto> atualizarProduto(@RequestBody @Valid DadosAtualizarProduto dados){
         var produto = produtoRepository.findByIdAndAtivoTrue(dados.id())
                 .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto não encontrado"));
